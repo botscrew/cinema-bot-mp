@@ -30,5 +30,19 @@ export const TOOLS =[
                 required: ['movie_id'],
             },
         }
+    },
+    {
+        type: 'function',
+        function: {
+            name: 'getCinemaKnowledge',
+            description: 'Дістає інформацію про роботу кінотеатру, містить відповіді на популярні питання користувачів FAQ',
+            parameters: {
+                type: 'object',
+                properties: {
+                    user_message: { type: 'string', description:'Питання користувача для пошуку релевантної інформації з бази знань кінотеатру. '},
+                },
+                required: ['user_message'],
+            },
+        }
     }
 ]

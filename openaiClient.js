@@ -2,6 +2,7 @@ import OpenAI from 'openai';
 import 'dotenv/config';
 import {INSTRUCTIONS, TOOLS} from "./constants.js";
 import {getAllMovies, getMovieSessionsByMovieId} from "./dbClient.js";
+import {getTopK} from "./vectordbClient.js";
 
 const client = new OpenAI({
     apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
@@ -36,6 +37,8 @@ async function run_tool(name, args, tool_call_id){
         result = await getAllMovies()
     }else if(name == "getMovieSessionsByMovieId"){
         result = await getMovieSessionsByMovieId(args.movie_id);
+    } else if (name == "getCinemaKnowledge"){
+        result = await getTopK(args.user_message, 3)
     }
     else {
         console.error("No such function")
